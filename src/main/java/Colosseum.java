@@ -102,8 +102,114 @@ public class Colosseum {
      * (Look, we can return objects too!)
      */
     public static Pokemon buildPokemon() {
-        Pokemon returnPokemon = null;
-        return returnPokemon;
+        ElectricPokemon returnPokemonElec = new ElectricPokemon();
+        FirePokemon returnPokemonFire = new FirePokemon();
+        WaterPokemon returnPokemonWater = new WaterPokemon();
+        int typeOfPokemon = 1;
+        for (;;) {
+            System.out.println("Select from the following Pokemon types");
+            System.out.println("1 - Electric Pokemon");
+            System.out.println("2 - Fire Pokemon");
+            System.out.println("3 - Water Pokemon");
+            final int water = 3;
+            myScan = new Scanner(System.in);
+            int checkType = myScan.nextInt();
+            if (checkType == 1) {
+                typeOfPokemon = 1;
+                break;
+            } else if (checkType == 2) {
+                typeOfPokemon = 2;
+                break;
+            } else if (checkType == water) {
+                typeOfPokemon = water;
+                break;
+            } else {
+                System.out.println("Sorry, you must pick either 1, 2, or 3.");
+            }
+        }
+        System.out.println("Please name your Pokemon:");
+        myScan = new Scanner(System.in);
+        String setName = myScan.next();
+        returnPokemonElec.setName(setName);
+        returnPokemonFire.setName(setName);
+        returnPokemonWater.setName(setName);
+        for (;;) {
+            System.out.println("How many hit points will it have? (1-50)");
+            myScan = new Scanner(System.in);
+            int setHp = myScan.nextInt();
+            if (0 < setHp && setHp <= MAX_HIT_POINTS) {
+                returnPokemonElec.setHitPoints(setHp);
+                returnPokemonFire.setHitPoints(setHp);
+                returnPokemonWater.setHitPoints(setHp);
+                break;
+            } else {
+                System.out.println("Sorry. Hit points must be between 1 and 50");
+            }
+        }
+        System.out.println("Split fifty points between attack level and defense level");
+        for (;;) {
+            System.out.println("Enter your attack level (1-49)");
+            myScan = new Scanner(System.in);
+            int setAtt = myScan.nextInt();
+            if (0 < setAtt && setAtt < MAX_HIT_POINTS) {
+                returnPokemonElec.setAttackLevel(setAtt);
+                returnPokemonFire.setAttackLevel(setAtt);
+                returnPokemonWater.setAttackLevel(setAtt);
+                break;
+            } else {
+                System.out.println("Sorry. The attack level must be between 1 and 49");
+            }
+        }
+        if (typeOfPokemon == 1) {
+            for (; ;) {
+                System.out.print("Enter your defense level (1-");
+                System.out.println(MAX_HIT_POINTS - returnPokemonElec.getAttackLevel() + ")");
+                myScan = new Scanner(System.in);
+                int setDef = myScan.nextInt();
+                if (0 < setDef && setDef <= MAX_HIT_POINTS - returnPokemonElec.getAttackLevel()) {
+                    returnPokemonElec.setDefenseLevel(setDef);
+                    break;
+                } else {
+                    System.out.println("Sorry. The defense level must be between 1 and ");
+                    System.out.println(MAX_HIT_POINTS - returnPokemonElec.getAttackLevel());
+                }
+            }
+        } else if (typeOfPokemon == 2) {
+            for (; ;) {
+                System.out.print("Enter your defense level (1-");
+                System.out.println(MAX_HIT_POINTS - returnPokemonFire.getAttackLevel() + ")");
+                myScan = new Scanner(System.in);
+                int setDef = myScan.nextInt();
+                if (0 < setDef && setDef <= MAX_HIT_POINTS - returnPokemonFire.getAttackLevel()) {
+                    returnPokemonFire.setDefenseLevel(setDef);
+                    break;
+                } else {
+                    System.out.println("Sorry. The defense level must be between 1 and ");
+                    System.out.println(MAX_HIT_POINTS - returnPokemonFire.getAttackLevel());
+                }
+            }
+        } else {
+            for (; ;) {
+                System.out.print("Enter your defense level (1-");
+                System.out.println(MAX_HIT_POINTS - returnPokemonWater.getAttackLevel() + ")");
+                myScan = new Scanner(System.in);
+                int setDef = myScan.nextInt();
+                if (0 < setDef && setDef <= MAX_HIT_POINTS - returnPokemonWater.getAttackLevel()) {
+                    returnPokemonWater.setDefenseLevel(setDef);
+                    break;
+                } else {
+                    System.out.println("Sorry. The defense level must be between 1 and ");
+                    System.out.println(MAX_HIT_POINTS - returnPokemonWater.getAttackLevel());
+                }
+            }
+        }
+        if (typeOfPokemon == 1) {
+            return returnPokemonElec;
+        } else if (typeOfPokemon == 2) {
+            return returnPokemonFire;
+        } else {
+            return returnPokemonWater;
+        }
     }
 
     /**
